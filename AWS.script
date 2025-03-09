@@ -1,0 +1,4 @@
+Give execution permission to the script:
+chmod +x scripts/aws_resource_tracker.sh
+Run the script:
+./scripts/aws_resource_tracker.sh
