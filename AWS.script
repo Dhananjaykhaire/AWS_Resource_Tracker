@@ -2,3 +2,4 @@ Give execution permission to the script:
 chmod +x scripts/aws_resource_tracker.sh
 Run the script:
 ./scripts/aws_resource_tracker.sh
+If you face permission issues, add IAM policies that allow s3:ListAllMyBuckets, ec2:DescribeInstances, etc.
