@@ -1,0 +1,107 @@
+# **Automating AWS Resource Tracking Using Linux & AWS CLI**
+
+## **Project Overview**
+This project automates AWS resource tracking using **Linux shell scripting** and **AWS CLI**, allowing users to efficiently monitor and manage AWS cloud resources. The script retrieves and logs information about AWS services such as **EC2 instances, S3 buckets, IAM users, and more**.
+
+---
+
+## **Technologies Used**
+- **Linux Shell Scripting** – Automates AWS CLI commands for resource monitoring.
+- **AWS CLI** – Executes commands to interact with AWS services.
+- **IAM Roles & Permissions** – Ensures security & access control for AWS API calls.
+- **Crontab (Scheduler)** – Automates execution at regular intervals.
+
+---
+
+## **Features Implemented**
+✅ **EC2 Instance Monitoring**: Retrieves instance IDs, types, states (running, stopped, terminated), and region-wise distribution.
+✅ **S3 Bucket Usage Tracking**: Lists all buckets, total size, and object count.
+✅ **IAM User & Role Details**: Fetches active IAM users, assigned roles, and permissions.
+✅ **Logging & Reporting**: Saves output in structured log files for analysis.
+✅ **Automated Execution**: Configured cron jobs for periodic execution.
+
+---
+
+## **Installation & Setup**
+### **1. Prerequisites**
+- AWS account with IAM user access.
+- AWS CLI installed and configured (`aws configure`).
+- Linux-based system with shell scripting support.
+
+### **2. AWS CLI Installation (if not installed)**
+```sh
+sudo apt update
+sudo apt install awscli -y
+aws --version  # Verify installation
+```
+
+### **3. Setting Up IAM Permissions**
+Ensure your IAM user has necessary permissions. Attach a policy like:
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeInstances",
+                "s3:ListAllMyBuckets",
+                "iam:ListUsers"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+### **4. Running the Script**
+```sh
+chmod +x aws_resource_tracker.sh  # Grant execution permission
+./aws_resource_tracker.sh        # Run the script
+```
+
+---
+
+## **Script Overview**
+### **aws_resource_tracker.sh**
+```sh
+#!/bin/bash
+# AWS Resource Tracker Script
+
+# Fetch EC2 Instances
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,InstanceType,State.Name]' --output table
+
+# Fetch S3 Buckets
+aws s3 ls
+
+# Fetch IAM Users
+aws iam list-users --query 'Users[*].[UserName,UserId,CreateDate]' --output table
+```
+
+---
+
+## **Automating Execution (Cron Job)**
+To run this script daily at midnight:
+```sh
+crontab -e
+```
+Add the following line:
+```sh
+0 0 * * * /path/to/aws_resource_tracker.sh >> /path/to/logfile.log 2>&1
+```
+
+---
+
+## **Key Learnings**
+📌 Hands-on experience with **Linux scripting & AWS CLI**.
+📌 Understanding **IAM policies & access management**.
+📌 Implementing **automation & scheduling** in AWS environments.
+
+---
+
+## **Future Enhancements**
+🔹 Store reports in **Amazon S3** for historical tracking.
+🔹 Use **AWS Lambda & SNS** for alert notifications.
+🔹 Integrate with **Grafana or CloudWatch** for better visualization.
+
+
