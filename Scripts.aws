@@ -1,0 +1,10 @@
+📦 aws-resource-tracker
+ ┣ 📂 scripts
+ ┃ ┣ 📜 aws_resource_tracker.sh  # Your main shell script
+ ┃ ┣ 📜 setup.sh                  # Optional setup script for dependencies
+ ┣ 📂 docs
+ ┃ ┣ 📜 project_documentation.md   # Detailed project documentation
+ ┃ ┣ 📜 aws_cli_usage.md           # AWS CLI command explanations
+ ┣ 📜 README.md                    # Main repo introduction
+ ┣ 📜 .gitignore                    # Ignore unnecessary files
+ ┗ 📜 LICENSE (optional)            # Add an open-source license
