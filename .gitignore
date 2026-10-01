@@ -1,0 +1,18 @@
+# Credentials and secrets
+.env
+.env.*
+.aws/
+*.pem
+
+# Runtime logs
+logs/*
+!logs/.gitkeep
+
+# Generated reports
+reports/*
+!reports/.gitkeep
+
+# Editor / OS files
+*.swp
+*.swo
+.DS_Store
