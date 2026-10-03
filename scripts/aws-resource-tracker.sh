@@ -11,8 +11,19 @@
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-REPORT_DIR="$PROJECT_DIR/reports"
-LOG_DIR="$PROJECT_DIR/logs"
+
+CONFIG_FILE="$PROJECT_DIR/config/aws-resource-tracker.conf"
+
+if [[ -f "$CONFIG_FILE" ]]; then
+    # shellcheck source=/dev/null
+    source "$CONFIG_FILE"
+fi
+
+REPORT_DIR="${REPORT_DIR:-reports}"
+LOG_DIR="${LOG_DIR:-logs}"
+
+[[ "$REPORT_DIR" = /* ]] || REPORT_DIR="$PROJECT_DIR/$REPORT_DIR"
+[[ "$LOG_DIR" = /* ]] || LOG_DIR="$PROJECT_DIR/$LOG_DIR"
 
 TIMESTAMP=$(date '+%Y-%m-%d_%H-%M-%S')
 REPORT_FILE="$REPORT_DIR/aws-resource-report-$TIMESTAMP.txt"
